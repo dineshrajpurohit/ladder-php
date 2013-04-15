@@ -18,9 +18,9 @@ include_once("includes/class/Error.class.php");
 include_once("includes/class/Layout.class.php");
 
 
-
-//$main = new Main();
-//$main->run();
+/**
+ * routing the application based on the url
+ */
 $bootstrap = new Bootstrap();
 $bootstrap->run();
 ?>

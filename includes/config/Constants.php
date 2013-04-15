@@ -31,5 +31,10 @@ define("LIBRARY_PATH", $include_path . "libs/");
  */
 define("CLASS_PATH", $include_path . "class/");
 
+/**
+ * Location for config files
+ */
+define("CONFIG_PATH", $include_path . "config/")
+
 
 ?>

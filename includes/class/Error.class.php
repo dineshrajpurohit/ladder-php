@@ -30,6 +30,32 @@ class Error {
         
         Layout::layout($layout);
     }
+    
+    /**
+     *
+     * @param type $code 
+     * 
+     * This will display error page with when there is some problem related to database
+     */
+    public static function PDOError($code, $message){
+        switch($code){
+            case "1049":
+                $message = "There is something wrong with the database: {$message}";
+                break;
+            case "42S02":
+                echo "dins";
+                $message = "Table not found: {$message}";
+                break;            
+        }
+        
+        $layout = array(
+            "bodyPage"=> "error",
+            "title" => "Error Page",
+            "error" => $message
+        );
+        
+        Layout::layout($layout);
+    }
 }
 
 ?>

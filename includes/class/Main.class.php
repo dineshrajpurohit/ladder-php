@@ -14,54 +14,58 @@ class Main {
     /*
      * Nothing to initialize yet
      */
-    public function __construct() {}
 
-  
+    public function __construct() {
+        
+    }
+
     /*
      * Check for the user session and redirect the user to a specific page
      * if the user has already logged in call the Player class
      * if the user is not logged in use this clas for navigation
      */
+
     public function run($url = null) {
         $this->url = $url;
         /**
          * if the url is not submitted we want to send the user to index page
          */
-        if($this->url == NULL) $this->index ();
-        
+        if ($this->url == NULL)
+            $this->index();
+
         /**
          * if the url has more than required arguments we need to send to 404 error page
          * we can modify this when we have more variables we want to check
          */
-        if(count($this->url) > 1) Error::display404($this->url);
-        
+        if (count($this->url) > 1)
+            Error::display404($this->url);
+
         /**
          * once we get the url we want to send the user to the specific method
          */
-        if(method_exists($this, $this->url[0])){
+        if (method_exists($this, $this->url[0])) {
             $this->{$this->url[0]}();
-        }else{
+        } else {
             Error::display404($this->url);
         }
-        
-        
     }
-    
+
     /*
      * Function which checked for the user session and return true if the user is logged in false otherwise
      */
+
     public function loggedIn() {
         if (Session::getSession("logged_in") == true) {
             return TRUE;
             //Session::destroySession();
         } else {
             return false;
-          ///  Session::setSession("loggen_in", true);
+            ///  Session::setSession("loggen_in", true);
         }
     }
 
     public function index() {
-        $session =  Session::getSession("logged_in");
+        $session = Session::getSession("logged_in");
         /*
          * Index page will diplay the latest event in the ladder tournament
          * User will get the option
@@ -95,6 +99,27 @@ class Main {
             "title" => "Rules Page"
         );
 
+        Layout::layout($layout);
+    }
+
+    /**
+     * Display the ranking of the player in ascending order
+     * We want to display the rank based on elo of the player
+     */
+    public function rankings() {
+        $db = Database::getInstance();
+        $db->connect();
+        $table = "users";
+        $data = array("fname","lname","rank");
+        $where = "ORDER BY rank ASC LIMIT 10";
+        $results = $db->select($table,$data,$where);
+        
+        $layout = array(
+            "bodyPage" => "rankings",
+            "title" => "Player Ranking",
+            "players" => $results
+        );
+        
         Layout::layout($layout);
     }
 

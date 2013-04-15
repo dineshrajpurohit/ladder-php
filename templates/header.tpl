@@ -21,7 +21,7 @@
                     <nav>
                         <ul class="nav pull-right">
                             <li><a href="/ladder/index" >Home</a></li>
-                            {if isset($logged_in)}
+                            {if !isset($logged_in)}
                                  <li><a href="/ladder/login" >Login</a></li>
                                  <li><a href="/ladder/register" >Register</a></li>
                              {else}
