@@ -3,7 +3,7 @@ ladder
 
 Notes:
 =============
-This application is still in progress of building.
+This application is in progress
 
 About:
 ====================
