@@ -67,11 +67,12 @@ class Main {
         /*
          * Index page will diplay the latest event in the ladder tournament
          * User will get the option
+         * I am just sending session information for now - needs to be modified
          */
         $layout = array(
             "bodyPage" => "index",
             "title" => "Ladder main page",
-            "session" => $session
+            "session" => $session,
         );
 
         Layout::layout($layout);
@@ -108,7 +109,7 @@ class Main {
         $db = Database::getInstance();
         $db->connect();
         $table = "users";
-        $data = array("fname","lname","rank");
+        $data = array("fname","lname","rank","elo");
         $where = "ORDER BY rank ASC LIMIT 10";
         $results = $db->select($table,$data,$where);
         

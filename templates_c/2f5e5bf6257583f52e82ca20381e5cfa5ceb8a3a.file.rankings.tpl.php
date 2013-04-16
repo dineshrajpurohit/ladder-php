@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-04-15 04:16:54
+<?php /* Smarty version Smarty-3.1.13, created on 2013-04-15 22:28:42
          compiled from ".\templates\rankings.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:10318516bdf3b5b7509-35148104%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2f5e5bf6257583f52e82ca20381e5cfa5ceb8a3a' => 
     array (
       0 => '.\\templates\\rankings.tpl',
-      1 => 1366024611,
+      1 => 1366090119,
       2 => 'file',
     ),
   ),
@@ -29,6 +29,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <tr>
             <th>Rank #</th>
             <th>Name</th>
+            <th>ELO</th>
         </tr>
     </thead>
     <?php  $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['i']->_loop = false;
@@ -43,6 +44,8 @@ $_smarty_tpl->tpl_vars['i']->_loop = true;
 </td>
             <td><?php echo $_smarty_tpl->tpl_vars['i']->value['fname'];?>
  <?php echo $_smarty_tpl->tpl_vars['i']->value['lname'];?>
+</td>
+            <td><?php echo $_smarty_tpl->tpl_vars['i']->value['elo'];?>
 </td>
         </tr>
     <?php } ?>

@@ -12,6 +12,9 @@ function __autoload($class){
 }
 
 // we want to be able to navigae user to the appropriate page 
+/**
+ * this is temporary. Once we have our application ready we can autoload this
+ */
 include_once("includes/class/Main.class.php");
 include_once("includes/class/Player.class.php");
 include_once("includes/class/Error.class.php");

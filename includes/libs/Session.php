@@ -16,9 +16,10 @@ abstract class Session {
 
     /*
      *  Function called when we want to set a new session
+     * it may be overkill but we will encrypt the session variable any ways so that even if the person gets hold of it dont know what to do with it
      */
     public static function setSession($key, $value){
-        $_SESSION[$key] = $value;
+        $_SESSION[$key] = Encryption::encrypt($value);
     }
     
     /*
@@ -27,7 +28,7 @@ abstract class Session {
      */
     public static function getSession($key){
         if(isset ($_SESSION[$key])){
-            return $_SESSION[$key];
+            return Encryption::decrypt($_SESSION[$key]);
         }
     }
     
