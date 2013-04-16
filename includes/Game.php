@@ -1,13 +1,9 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author rajpurohit
+ * 
+ * Still figuring out if I will need this interface
  */
 interface Game {
   

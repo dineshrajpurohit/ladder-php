@@ -1,10 +1,41 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * 
+ * by Dinesh Purohit
+ * 
+ * Please do not make any changes to this file. 
+ * 
  */
 
+
+/**
+ * We want the config file so that the variables can be assigned to constants
+ */
+require(dirname(__FILE__) . "/config.php");
+
+/**
+ * Website default constants
+ */
+define("LADDER_HEADER", $ladder_header);
+
+/**
+ * Database constants
+ */
+define("DB_TYPE", $db_type);
+define("DB_HOST", $db_host);
+define("DB_NAME", $db_name);
+define("DB_USERNAME", $db_username);
+define("DB_PASSWORD", $db_password);
+
+/**
+ * Security Constants
+ */
+define("SALT", $salt);
+
+/**
+ * Path constants
+ */
 $root_path = $_SERVER['DOCUMENT_ROOT'];
 $include_path = $root_path . "/ladder/includes/";
 

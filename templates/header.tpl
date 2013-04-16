@@ -17,7 +17,7 @@
         <header class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a href="" id="logo" >Ping Pong Challenge</a>
+                    <a href="" id="logo" >{$ladder_header}</a>
                     <nav>
                         <ul class="nav pull-right">
                             <li><a href="/ladder/index" >Home</a></li>

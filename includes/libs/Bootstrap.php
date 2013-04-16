@@ -1,10 +1,4 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * This file impements the routing for this application
  *
@@ -14,17 +8,10 @@ class Bootstrap {
     
     private $url;
     
-    public function __construct() {
-        
-        
-        //call the specific class
-//        if(empty ($this->url[0])){
-//            require_once(INCLUDE_PATH . "class/Main.class.php"); 
-//        }
-//        include_once(INCLUDE_PATH . "class/" . $this->url[0]) . ".class.php";
-//        $class = new $this->url[0]($this->url);
-        
-    }
+    /**
+     * for further use
+     */
+    public function __construct() {}
     
     public function run(){
         $this->url = isset($_GET["url"]) ? $_GET["url"] : NULL;

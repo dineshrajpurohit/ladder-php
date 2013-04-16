@@ -11,15 +11,13 @@ class Main {
 
     private $url;
 
-    /*
+    /**
      * Nothing to initialize yet
      */
 
-    public function __construct() {
-        
-    }
+    public function __construct() {}
 
-    /*
+    /**
      * Check for the user session and redirect the user to a specific page
      * if the user has already logged in call the Player class
      * if the user is not logged in use this clas for navigation
@@ -50,7 +48,7 @@ class Main {
         }
     }
 
-    /*
+    /**
      * Function which checked for the user session and return true if the user is logged in false otherwise
      */
 

@@ -1,10 +1,4 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of Database
  *
@@ -19,7 +13,7 @@
      private $connection;
 
      /**
-     * Make it private so it cannot be accessed 
+     * Make it private so it cannot be accessed directly
      */
     private function __construct() {}
     
@@ -37,9 +31,9 @@
      * Function used to connect the database
      */
     public function connect(){
-        require_once(CONFIG_PATH . "database.config");
         try{
-            $this->connection = new PDO("{$db_type}:dbname={$db_name};host={$db_host}", $db_username, $db_password);  
+            $dsc = DB_TYPE . ":dbname=" . DB_NAME . ";host=" . DB_HOST;
+            $this->connection = new PDO($dsc, DB_USERNAME, DB_PASSWORD);  
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }catch(PDOException $p){
             Error::PDOError($p->getCode(), $p->getMessage());

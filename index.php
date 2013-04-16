@@ -1,10 +1,10 @@
 <?php 
-/*
+/**
  * Always start the session before everything * 
  */
-include_once 'includes/config/Constants.php';
+require 'includes/config/Constants.php';
 
-/*
+/**
  * Autoloading all the important libraries
  */
 function __autoload($class){
@@ -19,7 +19,7 @@ include_once("includes/class/Layout.class.php");
 
 
 /**
- * routing the application based on the url
+ * routing the application based on the url 
  */
 $bootstrap = new Bootstrap();
 $bootstrap->run();
