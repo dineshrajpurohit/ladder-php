@@ -11,13 +11,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `fname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(30) NOT NULL,
   `rank` int(10) NOT NULL,
   `role` int(11) NOT NULL,
   `challenge_flag` tinyint(4) NOT NULL,
   `elo` int(11) NOT NULL,
   `last_login` date NOT NULL,
   `last_ip` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT;
 
 

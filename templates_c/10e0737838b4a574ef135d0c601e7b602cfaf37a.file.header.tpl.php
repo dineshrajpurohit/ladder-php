@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-04-15 21:58:46
+<?php /* Smarty version Smarty-3.1.13, created on 2013-04-16 04:24:46
          compiled from ".\templates\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1508516a27a59ad735-66523289%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '10e0737838b4a574ef135d0c601e7b602cfaf37a' => 
     array (
       0 => '.\\templates\\header.tpl',
-      1 => 1366088324,
+      1 => 1366111484,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'title' => 0,
+    'public_path' => 0,
     'ladder_header' => 0,
     'logged_in' => 0,
   ),
@@ -31,15 +32,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ladder - <?php echo $_smarty_tpl->tpl_vars['title']->value;?>
 </title>
-        
+
         <!-- css files -->
-        <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="public/css/main.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $_smarty_tpl->tpl_vars['public_path']->value;?>
+/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $_smarty_tpl->tpl_vars['public_path']->value;?>
+/css/main.css">
         <!-- Javascript files -->
-        <script src="public/js/jquery-1.9.1.min.js"></script>
-        <script src="pubic/js/bootstrap.min.js"></script>
-        
-        
+        <script src="<?php echo $_smarty_tpl->tpl_vars['public_path']->value;?>
+/js/jquery-1.9.1.min.js"></script>
+        <script src="<?php echo $_smarty_tpl->tpl_vars['public_path']->value;?>
+/bootstrap.min.js"></script>
+
+
     </head>
     <body>
         <header class="navbar navbar-inverse navbar-fixed-top">
@@ -49,13 +54,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </a>
                     <nav>
                         <ul class="nav pull-right">
-                            <li><a href="/ladder/index" >Home</a></li>
                             <?php if (!isset($_smarty_tpl->tpl_vars['logged_in']->value)){?>
-                                 <li><a href="/ladder/login" >Login</a></li>
-                                 <li><a href="/ladder/register" >Register</a></li>
-                             <?php }else{ ?>
-                                 <li><a href="/ladder/logout" >logout</a></li>
-                             <?php }?>
+                                <li><a href="/ladder/index" >Home</a></li>
+                                <li><a href="/ladder/login" >Login</a></li>
+                                <li><a href="/ladder/register" >Register</a></li>
+                            <?php }else{ ?>
+                                <li><a href="/ladder/player/profile" >Home</a></li>
+                                <li><a href="/ladder/player/logout" >logout</a></li>
+                            <?php }?>
                         </ul>
                     </nav>
                 </div>
@@ -64,17 +70,26 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <div class="navbar-inner">
                     <div class="container">
                         <ul class="nav">
-                    <li><a href="/ladder/index">Home</a></li>
-                    <li><a href="/ladder/rules">Rules</a></li>
-                    <li><a href="/ladder/rankings">Rankings</a></li>  
-                    <li><a href="/ladder/tournaments">Tournament</a></li>  
-                </ul> 
+                            <!-- There is a better way to do this -->
+                            <?php if (isset($_smarty_tpl->tpl_vars['logged_in']->value)){?>
+                                <li><a href="/ladder/player/profile">Home</a></li>
+                                <li><a href="/ladder/player/rules">Rules</a></li>
+                                <li><a href="/ladder/player/rankings">Rankings</a></li>  
+                                <li><a href="/ladder/player/tournaments">Tournament</a></li> 
+                            <?php }else{ ?>
+                                <li><a href="/ladder/index">Home</a></li>
+                                <li><a href="/ladder/rules">Rules</a></li>
+                                <li><a href="/ladder/rankings">Rankings</a></li>  
+                                <li><a href="/ladder/tournaments">Tournament</a></li> 
+                            <?php }?>
+
+                        </ul> 
                     </div>
                 </div>
-                               
+
             </div>
         </header><br/><br/>
         <div class="container">
-       
-        
+
+
 <?php }} ?>

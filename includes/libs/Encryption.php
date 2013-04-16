@@ -6,12 +6,13 @@
  * @author rajpurohit
  * All the encryptions will be handled in this files
  * 
- * 
+ * Also adding the sanitizations of the variables 
  */
 class Encryption {
 
     const CYPHER = MCRYPT_RIJNDAEL_256;
     const MODE   = MCRYPT_MODE_CBC;
+    
     
     /**
      *
@@ -22,8 +23,8 @@ class Encryption {
      * 
      * This function will be used to encrypt fields like password
      */
-    public static function create($algo, $data) {
-        $context = hash_init($algo, HASH_HMAC, SALT);
+    public static function create($data) {
+        $context = hash_init("md5", HASH_HMAC, SALT);
         hash_update($context, $data);
         return hash_final($context);
     }
@@ -65,6 +66,21 @@ class Encryption {
             $plaintext = mdecrypt_generic($td, $crypttext);
         }
         return trim($plaintext);
+    }
+    
+    /**
+     *
+     * @param type $param  a variable or an array which is sent via GET or POST request 
+     * 
+     * we need to check if there is no security 
+     */
+    public static function inputSanitizations($param){
+        if(is_array($param)){
+            return array_map("htmlspecialchars", $param);
+        }else{
+            return htmlspecialchars($param);
+        }
+        
     }
 
 }

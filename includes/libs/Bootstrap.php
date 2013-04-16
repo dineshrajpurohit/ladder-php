@@ -31,8 +31,7 @@ class Bootstrap {
         /**
          * if the return url has only one argument than we have to send it to default main class
          */
-        if(count($this->url) < 2) array_unshift($this->url, "main");
-        
+        if(count($this->url) < 2 && $this->url[0] != "player" && $this->url[0] != "main") array_unshift($this->url, "main");
         /**
          * we want to make sure the class file exists when called
          * if it does send it to the specific class

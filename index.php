@@ -5,21 +5,26 @@
 require 'includes/config/Constants.php';
 
 /**
- * Autoloading all the important libraries
+ * Autoloading all the important libraries and classes
+ * we are loading all of them since these are required all the time for the application ro run
  */
+
+// have to trace why encryption library does not load.. forcing it for the time being
+//require(LIBRARY_PATH . "Encryption.php");
 function __autoload($class){
-    require_once(LIBRARY_PATH . "{$class}.php");
+    $libPath = LIBRARY_PATH . "{$class}.php";
+    $classPath = CLASS_PATH . "{$class}.class.php";
+    if(file_exists($libPath)){
+        require_once($libPath);
+    }else{
+        require_once($classPath);
+    }
+    
 }
-
-// we want to be able to navigae user to the appropriate page 
 /**
- * this is temporary. Once we have our application ready we can autoload this
+ * After including all the files we want to start the session
  */
-include_once("includes/class/Main.class.php");
-include_once("includes/class/Player.class.php");
-include_once("includes/class/Error.class.php");
-include_once("includes/class/Layout.class.php");
-
+Session::startSession();
 
 /**
  * routing the application based on the url 

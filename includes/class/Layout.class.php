@@ -13,8 +13,7 @@ abstract class Layout {
     private function __construct() {
         /**
          * We want to assign the websitter header by default
-         */        
-       
+         */
     }
 
     /**
@@ -31,13 +30,21 @@ abstract class Layout {
         self::$smarty = new Smarty();
         self::$smarty->assign("public_path", PUBLIC_PATH);
         self::$smarty->assign("ladder_header", LADDER_HEADER);
-        
+
         if (!empty($layout)) {
             foreach ($layout as $key => $value) {
                 self::$smarty->assign($key, $value);
             }
             if (!array_key_exists("bodyPage", $layout))
                 self::$smarty->assign("bodyPage", "index");
+
+            /**
+             * check session if the user is logged in 
+             */
+            $logged_in = Session::getSession("logged_in");
+            if ($logged_in) {
+                self::$smarty->assign("logged_in", $logged_in);
+            }
         }
         self::$smarty->display("layout.tpl");
     }

@@ -1,1 +1,1 @@
-Error the page {$requested_page} you are trying to access does not exists
+Snap, page "{$requested_page}", was either not found or still not created

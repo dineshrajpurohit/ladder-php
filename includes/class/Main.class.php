@@ -14,22 +14,24 @@ class Main {
     /**
      * Nothing to initialize yet
      */
-
-    public function __construct() {}
+    public function __construct() {
+        
+    }
 
     /**
      * Check for the user session and redirect the user to a specific page
      * if the user has already logged in call the Player class
      * if the user is not logged in use this clas for navigation
      */
-
     public function run($url = null) {
         $this->url = $url;
         /**
          * if the url is not submitted we want to send the user to index page
          */
-        if ($this->url == NULL)
+        if ($this->url == NULL) {
             $this->index();
+            exit;
+        }
 
         /**
          * if the url has more than required arguments we need to send to 404 error page
@@ -51,7 +53,6 @@ class Main {
     /**
      * Function which checked for the user session and return true if the user is logged in false otherwise
      */
-
     public function loggedIn() {
         if (Session::getSession("logged_in") == true) {
             return TRUE;
@@ -84,9 +85,12 @@ class Main {
          * we want to pass an array to Layout class so that these values can be displayed on the template
          *  Array should have atleast one variable named bodyPage or it will alwayd display the index layout
          */
+        $error_message = Error::getErrorMessage();
+        Error::resetErrorMessage();
         $layout = array(
             "bodyPage" => "login",
-            "title" => "Login Page"
+            "title" => "Login Page",
+            "error_message" => $error_message
         );
 
         Layout::layout($layout);
@@ -109,17 +113,37 @@ class Main {
         $db = Database::getInstance();
         $db->connect();
         $table = "users";
-        $data = array("fname","lname","rank","elo");
+        $data = array("fname", "lname", "rank", "elo");
         $where = "ORDER BY rank ASC LIMIT 10";
-        $results = $db->select($table,$data,$where);
-        
+        $results = $db->select($table, $data, $where);
+        $db->closeConnection();
+
         $layout = array(
             "bodyPage" => "rankings",
             "title" => "Player Ranking",
             "players" => $results
         );
-        
+
         Layout::layout($layout);
+    }
+
+    /**
+     * authenticate function will receive POST variables and authenticate 
+     * It will redirect to player class on successfull authentication or display login form with error message
+     */
+    public function authenticate() {
+        $authArray = Encryption::inputSanitizations($_POST["Auth"]);
+        $authorization = new Authorization();
+        $valid = $authorization->checkCredentials($authArray);
+        /**
+         * if the login is successfull we want to send the user to player class
+         */
+        if ($valid) {
+            header("Location: player/profile");
+        } else {
+            Error::setErrorMessage("Username or password does not match");
+            header("Location: login");
+        }
     }
 
 }

@@ -1,6 +1,10 @@
 <?php
 /**
  * Description of Database
+ * 
+ * this class has implementation of all insert update and delete query
+ * 
+ * Please do not make any changes to this file
  *
  * @author rajpurohit
  */
@@ -53,6 +57,7 @@
      * @param type $fields - 
      * @param type $where - where clause to get certain result
      *  select something from table
+     * Right now we are hardcoding where which we can send as an array and modify usinf foreach
      */
     public function select($table, $fields, $where = ""){
         try{

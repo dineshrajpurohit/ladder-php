@@ -12,6 +12,9 @@ abstract class Session {
      */
     public static function startSession(){
         session_start();
+        /**
+         * Encryption class does not load sometimes so forcing here
+         */
     }
 
     /*
@@ -39,6 +42,14 @@ abstract class Session {
         if(isset($_SESSION[$key])){
             $_SESSION[$key] = NULL;
         }
+    }
+    
+    /**
+     * reseting a session variable
+     */
+    public static function resetSession($key){
+        if(isset ($_SESSION[$key]))
+            $_SESSION[$key] = "";
     }
     
     /*

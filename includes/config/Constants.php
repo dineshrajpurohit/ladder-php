@@ -18,6 +18,7 @@ require(dirname(__FILE__) . "/config.php");
  * Website default constants
  */
 define("LADDER_HEADER", $ladder_header);
+define("URL", $host_url);
 
 /**
  * Database constants
@@ -36,21 +37,22 @@ define("SALT", $salt);
 /**
  * Path constants
  */
-$root_path = $_SERVER['DOCUMENT_ROOT'];
-$include_path = $root_path . "/ladder/includes/";
+$root_path =  dirname($_SERVER['SCRIPT_FILENAME']) . "/";
+$include_path = $root_path . "/includes/";
 
 //path to include 
 define("INCLUDE_PATH", $include_path);
 //Path to smarty templates
 define("SMARTY", "{$include_path}Smarty/libs/");
 //Path to form folder
-define("FORMS", "{$root_path}/ladder/forms/");
+define("FORMS", "{$root_path}forms/");
 
 /**
  * Path to public folder
  * this path is used to obtain the css, javascript and the images files
+ * displaying public path as url -- for the time being
  */
-define("PUBLIC_PATH", "{$root_path}/ladder/public/");
+define("PUBLIC_PATH", URL . "public");
 
 /*
  * Location of all the library which are important for our aplication

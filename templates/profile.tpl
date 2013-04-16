@@ -1,0 +1,1 @@
+this is players profile page {$session}

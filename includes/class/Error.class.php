@@ -5,7 +5,7 @@
  * @author rajpurohit
  */
 class Error {
-     
+    
     /**
      *
      * @param type $url 
@@ -50,6 +50,28 @@ class Error {
         
         Layout::layout($layout);
     }
-}
+    
+    /**
+     * Setter for error Message
+     */
+    public static function setErrorMessage($message){
+        Session::setSession("error_message", $message);
+    }
+    
+    /**
+     * Getter for error message
+     */
+    public static function getErrorMessage(){
+        return Session::getSession("error_message");
+    }
+    
+    /**
+     *  reset user session
+     */
+    public static function resetErrorMessage(){
+        Session::resetSession("error_message");
+    }
+    
+} 
 
 ?>
