@@ -3,12 +3,12 @@ ladder
 
 Notes:
 =============
-This application is still in progress of building.
+This application is in progress
 
 About:
 ====================
-A game ladder web application where user can challenge other users. The game result are updated and an elo based ranking system determines the player position.
-Created this application keeping ping pong in mind. Can also be extended to include 
+A game ladder web application where a player can challenge other players for the game of ping pong, squash etc. The game result are updated and an elo based ranking system determines the player position.
+Created this application keeping ping pong in mind. Can also be extended to include other games like squash or tennis
 
 Usage:
 ================
