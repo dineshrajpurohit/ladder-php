@@ -16,16 +16,23 @@ class Validation {
 
     /**
      * checks if the arrtirbutes are present when the form was submitted
-     * @param type $attrs  - array of the values to be check for presence
+     * @param type $attrs  - array or string of the values to be check for presence
      * 
      */
     public function validates_presence_of($attrs) {
         $checkPresence = true; // always assume the data is present
-        foreach ($attrs as $attrKey => $attrValue) {
-            if ($attrValue == '' || $attrValue == null) {
-                $this->errorMessage .= ucfirst($attrKey) . " should not be empty<br/>";
-                $checkPresence = FALSE;
+        if (is_array($attrs)) {
+            foreach ($attrs as $attrKey => $attrValue) {
+                if ($attrValue == '' || $attrValue == null) {
+                    $this->errorMessage .= ucfirst($attrKey) . " should not be empty<br/>";
+                    $checkPresence = FALSE;
+                }
             }
+        }else{
+            if ($attrs == '' || $attrs == null) {
+                    $this->errorMessage .= ucfirst($attrs) . " should not be empty<br/>";
+                    $checkPresence = FALSE;
+                }
         }
         return (($checkPresence) ? "success" : $this->errorMessage);
     }
