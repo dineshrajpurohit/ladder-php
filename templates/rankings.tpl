@@ -11,6 +11,9 @@
             <td>{$i.rank}</td>
             <td>{$i.fname} {$i.lname}</td>
             <td>{$i.elo}</td>
+            {if isset($logged_in)}
+            <td><a class="btn btn-primary" href="">Challenge</td>
+            {/if}
         </tr>
     {/foreach}
 

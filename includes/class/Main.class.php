@@ -113,7 +113,7 @@ class Main {
         $db = Database::getInstance();
         $db->connect();
         $table = "users";
-        $data = array("fname", "lname", "rank", "elo");
+        $data = array("id","fname", "lname", "rank", "elo");
         $where = "ORDER BY rank ASC LIMIT 10";
         $results = $db->select($table, $data, $where);
         $db->closeConnection();
@@ -133,16 +133,44 @@ class Main {
      */
     public function authenticate() {
         $authArray = Encryption::inputSanitizations($_POST["Auth"]);
-        $authorization = new Authorization();
-        $valid = $authorization->checkCredentials($authArray);
+
         /**
-         * if the login is successfull we want to send the user to player class
+         * before sending data to the database we want to make sure that user has submitted data
          */
-        if ($valid) {
-            header("Location: player/profile");
-        } else {
-            Error::setErrorMessage("Username or password does not match");
+        $validate = new Validation();
+        /**
+         * Validating whether the user submitted null or empty data
+         */
+        $presence = $validate->validates_presence_of($authArray);
+        /**
+         * Validating the format of username
+         * 
+         * temporrary using this regex. 
+         * 
+         * Note: Michael's regex carries the regex for email copyright:
+         *
+         * Copyright © Michael Rushton 2009-10
+         * http://squiloople.com/
+         * Feel free to use and redistribute this code. But please keep this copyright notice.
+         */
+        $emailRegex = "/^(?!(?:(?:\\x22?\\x5C[\\x00-\\x7E]\\x22?)|(?:\\x22?[^\\x5C\\x22]\\x22?)){255,})(?!(?:(?:\\x22?\\x5C[\\x00-\\x7E]\\x22?)|(?:\\x22?[^\\x5C\\x22]\\x22?)){65,}@)(?:(?:[\\x21\\x23-\\x27\\x2A\\x2B\\x2D\\x2F-\\x39\\x3D\\x3F\\x5E-\\x7E]+)|(?:\\x22(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x1F\\x21\\x23-\\x5B\\x5D-\\x7F]|(?:\\x5C[\\x00-\\x7F]))*\\x22))(?:\\.(?:(?:[\\x21\\x23-\\x27\\x2A\\x2B\\x2D\\x2F-\\x39\\x3D\\x3F\\x5E-\\x7E]+)|(?:\\x22(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x1F\\x21\\x23-\\x5B\\x5D-\\x7F]|(?:\\x5C[\\x00-\\x7F]))*\\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-+[a-z0-9]+)*\\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-+[a-z0-9]+)*)|(?:\\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\\]))$/iD";
+        $format = $validate->validates_format_of(array("email" => $authArray["email"] , "with" => $emailRegex));
+        
+        if ($presence != "success" && $format != "success") {
+            Error::setErrorMessage($format);
             header("Location: login");
+        } else {
+            $authorization = new Authorization();
+            $valid = $authorization->checkCredentials($authArray);
+            /**
+             * if the login is successfull we want to send the user to player class
+             */
+            if ($valid) {
+                header("Location: player/profile");
+            } else {
+                Error::setErrorMessage("Username or password does not match");
+                header("Location: login");
+            }
         }
     }
 

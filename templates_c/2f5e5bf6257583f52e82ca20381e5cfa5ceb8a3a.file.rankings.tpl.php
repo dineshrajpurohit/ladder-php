@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-04-15 22:28:42
+<?php /* Smarty version Smarty-3.1.13, created on 2013-04-16 23:17:56
          compiled from ".\templates\rankings.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:10318516bdf3b5b7509-35148104%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2f5e5bf6257583f52e82ca20381e5cfa5ceb8a3a' => 
     array (
       0 => '.\\templates\\rankings.tpl',
-      1 => 1366090119,
+      1 => 1366179470,
       2 => 'file',
     ),
   ),
@@ -21,6 +21,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'players' => 0,
     'i' => 0,
+    'logged_in' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -47,6 +48,9 @@ $_smarty_tpl->tpl_vars['i']->_loop = true;
 </td>
             <td><?php echo $_smarty_tpl->tpl_vars['i']->value['elo'];?>
 </td>
+            <?php if (isset($_smarty_tpl->tpl_vars['logged_in']->value)){?>
+            <td><a class="btn btn-primary" href="">Challenge</td>
+            <?php }?>
         </tr>
     <?php } ?>
 

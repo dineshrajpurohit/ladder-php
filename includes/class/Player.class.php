@@ -74,7 +74,7 @@ class Player extends Main{
     /**
      * ranking
      */
-    public function ranling(){
+    public function rankings(){
         parent::rankings();
     }
     

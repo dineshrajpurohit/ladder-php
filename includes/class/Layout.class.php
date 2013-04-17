@@ -48,7 +48,17 @@ abstract class Layout {
         }
         self::$smarty->display("layout.tpl");
     }
+    
+    /**
+     * Assigning variables without drawing the layout
+     * temporary way to assign varible.
+     */
 
+    public static function assignVar($name, $value){
+        include_once SMARTY . "Smarty.class.php";
+        self::$smarty = new Smarty();
+        self::$smarty->assign($name, $value);
+    }
 }
 
 ?>
